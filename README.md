@@ -1,1 +1,1 @@
-# getting-started-with-continual-on-databricks
+# Getting Started with Continual on Databricks Lakehouse
