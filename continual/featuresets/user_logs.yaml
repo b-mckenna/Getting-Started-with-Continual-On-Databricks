@@ -1,0 +1,22 @@
+type: FeatureSet
+name: user_logs
+entity: kkbox_user
+index: msno
+time_index: ts
+description: user logs
+columns: 
+  - name: ts
+    type: timestamp
+  - name: msno
+    type: text
+  - name: log_date
+    type: timestamp
+owners:
+  - jordan@continual.ai
+documentation: |
+    https://docs.continual.ai/customer-churn/
+exclude_columns:
+  - date
+  - log_date
+query: |
+  select * from kkbox.user_logs_all

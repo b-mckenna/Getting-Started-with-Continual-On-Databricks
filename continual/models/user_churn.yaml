@@ -1,0 +1,43 @@
+type: Model
+name: user_churn
+index: msno
+time_index: ts
+target: is_churn
+split: split
+description: kkbox 30 day user churn
+owners:
+  - brendan@continual.ai
+documentation: |
+    https://docs.continual.ai/customer-churn/
+columns:
+  - name: msno
+    type: TEXT
+    entity: kkbox_user
+  - name: ts
+    type: TIMESTAMP
+  - name: next_transaction
+    type: TIMESTAMP
+  - name: most_recent_transaction
+    type: TIMESTAMP
+  - name: days_since_last_transaction
+    type: NUMBER
+  - name: days_expired
+    type: NUMBER
+  - name: is_churn
+    type: BOOLEAN
+  - name: split
+    type: SPLIT
+exclude_columns:
+  - next_transaction
+  - most_recent_transaction
+  - days_expired
+train:
+  metric: roc_auc
+  size: large
+  excluded_model_types:
+    - FastAI
+    - KNN
+    - NeuralNet
+    - LightGBMLarge
+query: |
+  select * from spark_catalog.kkbox.churn_model_definition
